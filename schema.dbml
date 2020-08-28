@@ -1,0 +1,33 @@
+
+Project morePlacesToStay {
+  database_type: 'PostgreSQL'
+}
+
+Table homes {
+  id int [pk, increment]
+  title varchar
+  rate int
+  superHost varchar
+  location varchar
+}
+
+Table images {
+  id int [pk, increment]
+  home_id int [ref: > homes.id]
+  image varchar
+  description varchar
+}
+
+Table ratings {
+  id int [pk, increment]
+  rating_id in [ref: > homes.id]
+  number_of_reviews int
+}
+
+Table list {
+  id int [pk,increment]
+  list_name varchar
+  list_id int
+  image varchar
+  stays int
+}
