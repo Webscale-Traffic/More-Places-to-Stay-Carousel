@@ -1,10 +1,10 @@
-id, title, image, description, avg_rating, rates, number_of_reviews, location, superhost 
-1, Exclusive Mountain View Home With City View, image, Entire House • 6, 3.0, $331, 88, "Gardena, California, United States", true
-2, undefined Cabin w/ Panoramic View, image, Entire undefined • 2, 3.0, $240, 296, "Salinas, California, United States", true
-3, Exclusive Cottage With Magistic Mountain View, image, Entire Loft • 4, 3.0, $371, 105, "Avondale, Arizona, United States", false
-4, Unforgettable Barn With Magistic Mountain View, image, Entire Resort • 7, 5.0, undefined, 354, "Houston, Texas, United States", true
-5, Warm Beach House undefined, image, Entire Cottage • 1, 3.0, $274, 214, "Upper Hominy, North Carolina, United States", true
-6, Cozy Mansion in a Quiet Neighborhood, image, Entire Beach House • 2, 4.0, $240, 259, "Wimberley, Texas, United States", true
-7, Upscale Barn With Ocean View, image, Entire Cottage • 7, 4.0, $180, 201, "Seaside, California, United States", false
-8, Magical Barn With Pool, image, Entire Beach House • 7, 3.0, $240, 278, "Los Angles, California, United States", true
-9, Cozy Guesthouse With Hot Tub, image, Entire Loft • 5, 3.0, $449, 330, "undefined", true
+id, title, image, description, avg_rating, rates, number_of_reviews, location, superhost saved_list 
+1, Warm Treehouse With Wifi/Netflix, image, Entire Cottage • 6, 4.0, $240, 79, "Houston, Texas, United States", true, null
+2, New! House w/ Panoramic View, image, Entire Apartment • 4, 4.0, $235, 314, "Los Angles, California, United States", false, null
+3, Luxury Bungalow With Hot Tub, image, Entire Beach House • 5, 3.0, $280, 174, "Vashon, Washington, United States", false, null
+4, Spacious Apartment With Wifi/Netflix, image, Entire Treehouse • 6, 5.0, $274, 340, "Austin, Texas, United States", true, null
+5, Luxurious Bungalow w/ Boathouse, image, Entire Condo • 1, 4.0, $240, 35, "Seattle, Washington, United States", false, null
+6, Upscale undefined 10 mins away from major attractions, image, Entire Mansion • 2, 3.0, $342, 36, "Seaside, California, United States", false, null
+7, Luxury Barn 10 mins away from major attractions, image, Entire House • 5, 3.0, $180, 64, "Los Angles, California, United States", true, null
+8, Luxurious Guesthouse With Wifi/Netflix, image, Entire Mansion • 3, 5.0, $290, 49, "Jersey City, New Jersey, United States", false, null
+9, Gorgeous undefined With Pool, image, Entire Barn • 3, 5.0, $274, 286, "Austin, Texas, United States", false, null

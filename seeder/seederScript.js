@@ -26,7 +26,7 @@ const rates = ['$135', '$235', '$240', '$449', '$371', '$409', '$180', '$130', '
 let ratings = randomNumber(0,5);
 
 const seedProperty = (entries) => {
-  let data = 'id, title, image, description, avg_rating, rates, number_of_reviews, location, superhost \n';
+  let data = 'id, title, image, description, avg_rating, rates, number_of_reviews, location, superhost saved_list \n';
   for (let i = 1; i < entries; i++) {
     let random = randomNumber()
     let title = `${nameNouns[randomNumber(0,nameNouns.length)]} ${houseType[randomNumber(0,houseType.length)]} ${amenities[randomNumber(0,amenities.length)]}`;
@@ -41,11 +41,12 @@ const seedProperty = (entries) => {
     data += ` ${rates[randomNumber(0,rates.length)]},`;
     data += ` ${randomNumber(35, 368)},`;
     data += ` "${location}",`;
-    data += ` ${faker.random.boolean()}`;
+    data += ` ${faker.random.boolean()},`;
+    data += ` ${null}`
     data += `\n`
   }
   return new Promise((resolve, reject) => {
-    fs.writeFile('property.txt', data, (err, data) => {
+    fs.writeFile('property.csv', data, (err, data) => {
       if (err) {
         reject(err)
       } else {
