@@ -12,6 +12,7 @@
 
     #Gets the home listing with id 20
 
+
 **Success Status Code:** `200`
 
 **Returns:** JSON
@@ -19,16 +20,27 @@
 ```json
     {
       "id": "Number",
-      "property_id": "Number",
-      "description": "String",
       "title": "String",
-      "rate": "Number",
-      "avgRating": "Number",
       "image": "String",
-      "ratings": "Number",
-      "superHost": "boolean",
-      "savedList": "String",
-      "location": "String"
+      "description": "String",
+      "avg_rating": "Number",
+      "rates": "Number",
+      "number_of_reviews": "Number",
+      "location": "String",
+      "superhost": "boolean",
+      "saved_list": "String",
+    }
+```
+  **Gets Similar Homes by id**
+
+  * GET `/api/homelistings/20/similar`
+
+    #Gets similar home listing with id 20
+
+```json
+    {
+      "property_id": "Number",
+      "related_id": "Number"
     }
 ```
 
@@ -41,20 +53,18 @@
 
 ```json
     {
-      "id": "Number",
-      "property_id": "Number",
-      "description": "String",
+       "id": "Number",
       "title": "String",
-      "rate": "Number",
-      "avgRating": "Number",
       "image": "String",
-      "ratings": "Number",
-      "superHost": "boolean",
-      "savedList": "String",
-      "location": "String"
+      "description": "String",
+      "avg_rating": "Number",
+      "rates": "Number",
+      "number_of_reviews": "Number",
+      "location": "String",
+      "superhost": "boolean",
+      "saved_list": "String"
     }
 ```
-
 
 ### Update Home Listing
   * PATCH `/api/homelistings/25`
@@ -67,17 +77,16 @@
 
 ```json
     {
-      "id": "Number",
-      "property_id": "Number",
-      "description": "String",
+       "id": "Number",
       "title": "String",
-      "rate": "Number",
-      "avgRating": "Number",
       "image": "String",
-      "ratings": "Number",
-      "superHost": "boolean",
-      "savedList": "String",
-      "location": "String"
+      "description": "String",
+      "avg_rating": "Number",
+      "rates": "Number",
+      "number_of_reviews": "Number",
+      "location": "String",
+      "superhost": "boolean",
+      "saved_list": "String"
     }
 ```
 
@@ -88,27 +97,9 @@
 
 **Success Status Code:** `204`
 
-### Add image to Home listing
-  * POST `/api/homelistings/22/image`
-
-    #Adds an image url to the image table with home listing id 22
-
-**Success Status Code:** `201`
-
-**Request Body**: Expects JSON with the following keys.
-
-```json
-    {
-      "id": "Number",
-      "homeListing_id": "Number",
-      "description": "String",
-      "posted": "YYYY-MM-MM",
-    }
-```
-
 ### Add saved list to property
 
-  * POST `/api/homelistings/22/saved_list`
+  * PATCH `/api/homelistings/22`
 
     #Adds an list to home listing id 22
 
@@ -118,8 +109,7 @@
 
 ```json
     {
-      "id": "Number",
-      "list_name": "String",
+      "saved_list": "Number",
     }
 ```
 
@@ -137,5 +127,6 @@
     {
       "id": "Number",
       "property_id": "String",
+      "list_id": "Number"
     }
 ```

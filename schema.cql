@@ -7,20 +7,21 @@ USE more_places_to_stay;
 
 CREATE TABLE property (
   id uuid,
+  location text,
   title text,
   image text,
   description text,
   rates smallint,
   ratings smallint,
   number_of_reviews smallint,
-  location text,
   superhost boolean,
-  PRIMARY KEY (id)
+  related_listing map<text,text>
+  PRIMARY KEY (id, location )
 );
 
 CREATE TABLE saved_list (
   list_name text,
-  property_id list<int>,
+  property map<text,text>,
   stays smallint,
   PRIMARY KEY (list_name)
 );
