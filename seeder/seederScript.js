@@ -20,29 +20,29 @@ const amenities = ['With Patio', 'With Ocean View', 'With Hot Tub', 'w/ Boathous
 
 const rates = ['$135', '$235', '$240', '$449', '$371', '$409', '$180', '$130', '$331', '$290', '$274', '$342', '$280'];
 
+const rating = [3.66, 4.59, 4.18, 3.42, 4.99, 4.93, 3.77, 3.88, 4.81, 4.93, 4.36, 4.78, 4.81, 4.86, 4.95, 4.92 ];
 
 // console.log(randomNumber(0,12))
 //faker.random.boolean
 let ratings = randomNumber(0,5);
 
 const seedProperty = (entries) => {
-  let data = 'id, title, image, description, avg_rating, rates, number_of_reviews, location, superhost saved_list \n';
+  let data = 'id, title, image, description, avg_rating, rates, number_of_reviews, location, superhost \n';
   for (let i = 1; i < entries; i++) {
     let random = randomNumber()
     let title = `${nameNouns[randomNumber(0,nameNouns.length)]} ${houseType[randomNumber(0,houseType.length)]} ${amenities[randomNumber(0,amenities.length)]}`;
     let image = `image`;
-    let description = `Entire ${houseType[randomNumber(0,houseType.length)]} • ${randomNumber(1,7)}`;
+    let description = `Entire ${houseType[randomNumber(0,houseType.length)]} • ${randomNumber(1,7)} beds`;
     let location = `${locations[randomNumber(0,locations.length)]}`
     data += `${i},`;
     data += ` ${title},`;
     data += ` ${image},`;
     data += ` ${description},`;
-    data += ` ${randomNumber(3,5).toPrecision(2)},`;
+    data += ` ${rating[i%16]},`;
     data += ` ${rates[randomNumber(0,rates.length)]},`;
     data += ` ${randomNumber(35, 368)},`;
     data += ` "${location}",`;
-    data += ` ${faker.random.boolean()},`;
-    data += ` ${null}`
+    data += ` ${faker.random.boolean()}`;
     data += `\n`
   }
   return new Promise((resolve, reject) => {
