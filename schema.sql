@@ -4,28 +4,17 @@ CREATE DATABASE more_places_to_stay;
 
 \c more_places_to_stay
 
--- CREATE TABLE properties (
---   id SERIAL PRIMARY KEY,
---   title varchar(256),
---   rates smallint,
---   rating numeric,
---   superhost boolean,
---   location varchar(50)
--- );
-
-
 CREATE TABLE properties (
   id SERIAL PRIMARY KEY,
   title varchar(256),
   image varchar(100),
   description varchar(75),
-  rating numeric,
-  rates smallint,
+  avg_rating numeric,
+  rates varchar(5),
   number_of_reviews smallint,
-  location_id smallint,
+  location varchar(100),
   superhost boolean,
-  saved_list varchar(100),
-  FOREIGN KEY (location_id) REFERENCES locations(id)
+  saved_list smallint
 );
 
 CREATE TABLE similiar_properties (
@@ -42,21 +31,3 @@ CREATE TABLE saved_list (
   FOREIGN KEY (list_id) REFERENCES properties(id)
 );
 
--- CREATE TABLE images (
---   id SERIAL PRIMARY KEY,
---   home_id int NOT NULL,
---   image varchar,
---   description varchar,
---   CONSTRAINT fk_homes
---   FOREIGN KEY (home_id)
---   REFERENCES properties(id)
--- );
-
--- CREATE TABLE ratings (
---   id SERIAL PRIMARY KEY,
---   home_id int NOT NULL,
---   number_of_reviews int,
---    CONSTRAINT fk_homes
---   FOREIGN KEY (home_id)
---   REFERENCES homes(id)
--- );
