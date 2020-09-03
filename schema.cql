@@ -5,23 +5,37 @@ CREATE KEYSPACE more_places_to_stay
 
 USE more_places_to_stay;
 
-CREATE TABLE property (
-  id uuid,
+CREATE TYPE property (
+  id int,
+  location text,
+  description text,
+  images text,
+  number_of_reviews smallint,
+  rate text,
+  ratings decimal,
+  superhost boolean,
+  title text
+);
+
+CREATE TABLE properties (
+  id int,
   location text,
   title text,
-  image text,
+  images text,
   description text,
-  rates smallint,
-  ratings smallint,
+  rate text,
+  ratings decimal,
   number_of_reviews smallint,
   superhost boolean,
-  related_listing map<text,text>
-  PRIMARY KEY (id, location )
+  similiar_properties list<frozen<property>>,
+  PRIMARY KEY (id, location)
 );
 
 CREATE TABLE saved_list (
   list_name text,
   property map<text,text>,
-  stays smallint,
   PRIMARY KEY (list_name)
 );
+
+COPY properties from '/Users/michaelwu/Desktop/Hrsf129/SDC/More-places-to-stay-carousel/seeder/propertyCassandra.csv' WITH HEADER=true and DELIMITER=';';
+WITH MINBATCHSIZE=1 AND MAXBATCHSIZE=1 AND PAGESIZE=10;

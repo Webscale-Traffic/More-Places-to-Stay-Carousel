@@ -2,41 +2,47 @@ const express = require('express');
 const path = require('path');
 const compression = require('compression');
 const expressStaticGzip = require('express-static-gzip');
-const model = require('../db/model.js');
+const model = require('../postgresDB/model.js');
 
 const app = express();
 app.use(compression());
 
 const PORT = 3004;
 app.use(express.static(path.join(__dirname, '../public')));
-// app.use('/rooms/:room_id', expressStaticGzip(path.join(__dirname, '../public')));
 
-app.get('/suggestedListings', (req, res) => {
-  console.log('get req working!');
-  model.getListings((error, listings) => {
-    if (error) {
-      console.log('server down');
-      res.status(400).send(error);
+app.get('/properties/', (req, res) => {
+  model.getProperties((err, data) => {
+    if (err) {
+      console.log('error');
+      res.status(404).send();
     } else {
-      console.log('GET received!');
-      res.status(200).send(listings);
+      res.status(200).send(data);
     }
-  });
+  })
 });
 
-app.post('/suggestedListings', (req, res) => {
-  console.log('get req working!');
-  model.postListings((error, listings) => {
-    if (error) {
-      console.log('server down');
-      res.status(400).send(error);
+app.get('/properties/:id', (req, res) => {
+  model.getOneProperty(req.params.id, (err, data) => {
+    if (err) {
+      console.log('error');
+      res.status(404).send();
     } else {
-      console.log('GET received!');
-      res.status(200).send(listings);
+      res.status(200).send(data);
     }
-  });
+  })
 });
 
+
+app.get('/properties/similiar/:id', (req, res) => {
+  model.getSimiliarProperties(req.params.id, (err, data) => {
+    if (err) {
+      console.log('error');
+      res.status(404).send();
+    } else {
+      res.status(200).send(data);
+    }
+  })
+})
 
 
 app.listen(PORT, (error) => {
