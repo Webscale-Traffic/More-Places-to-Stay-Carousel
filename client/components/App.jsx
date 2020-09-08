@@ -70,7 +70,7 @@ class App extends React.Component {
   }
 
   getListings() {
-    axios.get('/suggestedListings')
+    axios.get(`/properties/:id`)
       .then((response) => {
         const suggestedListings = response.data;
         console.log(suggestedListings);
