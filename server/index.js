@@ -3,14 +3,15 @@ const path = require('path');
 const compression = require('compression');
 const expressStaticGzip = require('express-static-gzip');
 const model = require('../postgresDB/model.js');
+require('newrelic');
 
 const app = express();
 app.use(compression());
 
 const PORT = 3004;
-app.use(express.static(path.join(__dirname, '../public')));
+app.use('/properties/:id', express.static(path.join(__dirname, '../public')));
 
-app.get('/properties/', (req, res) => {
+app.get('/properties', (req, res) => {
   model.getProperties((err, data) => {
     if (err) {
       console.log('error');
@@ -33,7 +34,7 @@ app.get('/properties/:id', (req, res) => {
 });
 
 
-app.get('/properties/similiar/:id', (req, res) => {
+app.get('/properties/:id/similiar', (req, res) => {
   model.getSimiliarProperties(req.params.id, (err, data) => {
     if (err) {
       console.log('error');

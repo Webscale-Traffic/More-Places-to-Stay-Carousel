@@ -51,7 +51,7 @@ const propertyZero = (id) => {
 
   let images = `${image[randomNumber(0, image.length-1)]}`;
 
-  let description = `Entire ${houseType[randomNumber(0, houseType.length - 1)]} • ${randomNumber(1, 7)} beds`;
+  let description = `Entire ${houseType[randomNumber(0, houseType.length - 1)]} - ${randomNumber(1, 7)} beds`;
 
   let rate = `${rates[randomNumber(0, rates.length-1)]}`;
 
@@ -61,27 +61,80 @@ const propertyZero = (id) => {
 
   let superhost = `${boolHost[randomNumber(0, boolHost.length-1)]}`;
 
-  for (let i = 0; i < 12; i ++) {
-    let similiarProperties = {};
-    let stringProperty = '';
-    let subId = randomNumberSet[randomNumber(0, randomNumberSet.length-1)];
-    let subLocation = `"${locations[randomNumber(0, locations.length-1)]}"`;
-    let subTitle = `${nameNouns[randomNumber(0, nameNouns.length - 1)]} ${houseType[randomNumber(0, houseType.length - 1)]} ${amenities[randomNumber(0, amenities.length - 1)]}`;
-    let subImages = `${image[randomNumber(0, image.length-1)]}`;
-    let subDescription = `Entire ${houseType[randomNumber(0, houseType.length - 1)]} • ${randomNumber(1, 7)} beds`;
-    let subRate = `${rates[randomNumber(0, rates.length-1)]}`;
-    let subRatings = `${rating[randomNumber(0, rating.length-1)]}`;
-    let subReviews = `${randomNumber(35, 368)}`;
-    let subSuperhost = `${boolHost[randomNumber(0, boolHost.length-1)]}`;
+  // for (let i = 0; i < 12; i ++) {
+  //   let similiarProperties = {};
+  //   let stringProperty = '';
+  //   let subId = randomNumberSet[randomNumber(0, randomNumberSet.length-1)];
+  //   let subLocation = `"${locations[randomNumber(0, locations.length-1)]}"`;
+  //   let subTitle = `${nameNouns[randomNumber(0, nameNouns.length - 1)]} ${houseType[randomNumber(0, houseType.length - 1)]} ${amenities[randomNumber(0, amenities.length - 1)]}`;
+  //   let subImages = `${image[randomNumber(0, image.length-1)]}`;
+  //   let subDescription = `Entire ${houseType[randomNumber(0, houseType.length - 1)]} • ${randomNumber(1, 7)} beds`;
+  //   let subRate = `${rates[randomNumber(0, rates.length-1)]}`;
+  //   let subRatings = `${rating[randomNumber(0, rating.length-1)]}`;
+  //   let subReviews = `${randomNumber(35, 368)}`;
+  //   let subSuperhost = `${boolHost[randomNumber(0, boolHost.length-1)]}`;
 
-    stringProperty = `{id: ${subId}, location: ${subLocation}, description: ${subDescription}, images: ${subImages}, number_of_reviews: ${subReviews}, rate: ${subRate}, ratings: ${subRatings}, superhost: ${subSuperhost}, title: ${subTitle}}`
-    collection.push(stringProperty);
-  }
-    data = `${id};${location};${description};${images};${reviews};${rate};${ratings};[${collection}];${superhost};${title}\n`;
+  //   stringProperty = `{id: ${subId}, location: ${subLocation}, description: ${subDescription}, images: ${subImages}, number_of_reviews: ${subReviews}, rate: ${subRate}, ratings: ${subRatings}, superhost: ${subSuperhost}, title: ${subTitle}}`
+  //   collection.push(stringProperty);
+  // }
+    data = `${id};${location};${description};${images};${reviews};${rate};${ratings};${superhost};${title}\n`;
 
   // console.log(data);
   return data;
 }
+
+const similiarProperties = (id) => {
+
+  let noDuplicate = {};
+  let checkArray =[];
+  let dataSim = '';
+  let currentID = 0;
+
+    for (let i = 1; i < 12; i++) {
+    const randomNumberSet = [randomNumber(1, 10), randomNumber(10, 100), randomNumber(100, 1000),randomNumber(1000, 10000), randomNumber(10000, 100000), randomNumber(100000, 1000000), randomNumber(5000000, 10000000), randomNumber(1000000, 10000000)];
+      if ( currentID !== id && noDuplicate[randomNumberSet] === undefined) {
+        let randomProperty = randomNumberSet[i % 8];
+        currentID = randomProperty;
+        dataSim += `${id};`;
+        dataSim += `${randomProperty}`;
+        dataSim += `\n`;
+        noDuplicate[randomNumberSet] = 1;
+        checkArray.push(randomProperty)
+      }
+  }
+  return dataSim;
+};
+
+const writeSim = (writer, times, callback) => {
+  let id = 5000000;
+  const writeFile = () => {
+    let ok = true;
+    do {
+      times--;
+      id++;
+      const data1 = similiarProperties(id);
+      if (times === 0) {
+        writer.write(data1, 'ascii', callback);
+      } else {
+        ok = writer.write(data1, 'ascii')
+        if (!ok) {
+          checkMemoryNative();
+        }
+      }
+    } while (times > 0 && ok);
+    if (times > 0) {
+      writer.once('drain', writeFile)
+    }
+  }
+  writeFile();
+}
+// console.log(writeSim());
+const writeStream = fs.createWriteStream('./SimCassandra1.csv')
+const line1 = 'main_id;similiar_id\n';
+writeStream.write(line1);
+writeSim(writeStream, 5000000, () => {
+  console.log('written! similiar')
+})
 
 const writeProperty = (writer, times, callback) => {
   let id = 0;
@@ -107,12 +160,12 @@ const writeProperty = (writer, times, callback) => {
   writeFile();
 }
 
-const writeStream = fs.createWriteStream('./propertyCassandraWithAscii.csv')
-const line1 = 'id;location;description;images;number_of_reviews;rate;ratings;similiar_properties;superhost;title\n';
-writeStream.write(line1);
-writeProperty(writeStream, 10000000, () => {
-  console.log('written!')
-})
+// const writeStream = fs.createWriteStream('./propertyCassandraFinal1.csv')
+// const line1 = 'id;location;description;images;number_of_reviews;rate;ratings;superhost;title\n';
+// writeStream.write(line1);
+// writeProperty(writeStream, 5000000, () => {
+//   console.log('written!')
+// })
 
 // console.log(randomNumberSet[randomNumber(0, randomNumberSet.length-1)])
 

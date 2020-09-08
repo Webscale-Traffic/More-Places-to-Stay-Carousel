@@ -3,7 +3,7 @@ const db = require('./index.js');
 
 module.exports = {
   getProperties: (callback) => {
-    db.query('select * from properties order by id desc limit 20' , (error, data) => {
+    db.query('select * from properties order by id asc limit 20' , (error, data) => {
       if (error) {
         console.log('cannot search database');
         callback(error);

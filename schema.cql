@@ -1,21 +1,10 @@
-DROP KEYSPACE IF EXISTS more_places_to_stay;
+DROP KEYSPACE IF EXISTS morePlaceToStay;
 
-CREATE KEYSPACE more_places_to_stay
-             WITH replication = {'class':'SimpleStrategy', 'replication_factor': 2};
+CREATE KEYSPACE morePlaceToStay
+             WITH replication = {'class':'SimpleStrategy', 'replication_factor': 1};
 
-USE more_places_to_stay;
+USE morePlaceToStay;
 
-CREATE TYPE property (
-  id int,
-  location text,
-  description text,
-  images text,
-  number_of_reviews smallint,
-  rate text,
-  ratings decimal,
-  superhost boolean,
-  title text
-);
 
 CREATE TABLE properties (
   id int,
@@ -27,15 +16,28 @@ CREATE TABLE properties (
   ratings decimal,
   number_of_reviews smallint,
   superhost boolean,
-  similiar_properties list<frozen<property>>,
   PRIMARY KEY (id, location)
+) WITH CLUSTERING ORDER BY (location DESC);
+
+CREATE TABLE similiar_properties_by_id (
+  main_id int ,
+  similiar_id int,
+  PRIMARY KEY (main_id, similiar_id)
 );
 
 CREATE TABLE saved_list (
+  id int,
   list_name text,
-  property map<text,text>,
-  PRIMARY KEY (list_name)
+  pop_id int,
+  PRIMARY KEY (list_name,list_name,pop_id)
 );
 
-COPY properties from '/Users/michaelwu/Desktop/Hrsf129/SDC/More-places-to-stay-carousel/seeder/propertyCassandra.csv' WITH HEADER=true and DELIMITER=';';
-WITH MINBATCHSIZE=1 AND MAXBATCHSIZE=1 AND PAGESIZE=10;
+
+
+COPY properties from '/Users/michaelwu/Desktop/Hrsf129/SDC/More-places-to-stay-carousel/seeder/propertyCassandraFinal1.csv' WITH HEADER=true and DELIMITER=';' AND CHUNKSIZE=500 AND NUMPROCESSES=4;
+
+COPY properties from '/Users/michaelwu/Desktop/Hrsf129/SDC/More-places-to-stay-carousel/seeder/propertyCassandraFinal2.csv' WITH HEADER=true and DELIMITER=';' AND CHUNKSIZE=500 AND NUMPROCESSES=4;
+
+COPY similiar_properties_by_id from '/Users/michaelwu/Desktop/Hrsf129/SDC/More-places-to-stay-carousel/seeder/SimCassandra.csv' WITH HEADER=true and DELIMITER=';' AND CHUNKSIZE=1000 AND NUMPROCESSES=4;
+
+COPY saved_list from '/Users/michaelwu/Desktop/Hrsf129/SDC/More-places-to-stay-carousel/seeder/cassandra_list.csv' WITH HEADER=true and DELIMITER=';' AND CHUNKSIZE=1000 AND NUMPROCESSES=4;
