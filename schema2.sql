@@ -51,7 +51,7 @@ DELIMITER ',' CSV HEADER;
 
 -- copy saved_list csv into saved_list table
 COPY saved_list
-FROM '/home/ec2-user/list.csv'
+FROM '/home/ec2-user/list.csv'\
 DELIMITER ',' CSV HEADER;
 
 
