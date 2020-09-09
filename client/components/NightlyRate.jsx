@@ -20,7 +20,7 @@ const NightlyRate = (props) => (
   <Rate>
     <strong>
       <span>$</span>
-      {props.rate.rate}
+      {props.rate.rates}
     </strong>
     <PerNight>
       / night

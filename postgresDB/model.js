@@ -15,7 +15,7 @@ module.exports = {
   },
 
   getSimiliarProperties: (id, callback) => {
-    db.query(`select * from similiar_properties where property_id = ${id};` , (error, data) => {
+    db.query(`select * from properties inner join similiar_properties on property_id = ${id} where properties.id = related_id;` , (error, data) => {
       if (error) {
         console.log('cannot search database',id, error);
         callback(error);
@@ -37,4 +37,16 @@ module.exports = {
       }
     });
   },
+
+  saveList: (data, id, callback) => {
+    db.query(`insert into saved_list (list_name, pop_id) values ('${data.list_name}', ${id})`, (error, data) => {
+      if (error) {
+        console.log('cannot add into list', data);
+        callback(error);
+      } else {
+        console.log('added into database');
+        callback(null, data);
+      }
+    })
+  }
 };

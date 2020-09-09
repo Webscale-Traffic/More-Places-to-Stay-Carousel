@@ -22,7 +22,7 @@ const Wrapper = styled.div`
   color: rgb(34, 34, 34);
   background-color: rgb(247, 247, 247);
   display: flex;
-  font-weight: 400;
+  font-weight: 200;
   font-size: 16px;
   max-height: 20px;
   margin-bottom: 2px;
@@ -33,6 +33,7 @@ const Listing = (props) => (
   <Wrapper>
     <List>
       <SpaceAvailable>{props.listing.title}</SpaceAvailable>
+      <br></br>
     </List>
   </Wrapper>
 );

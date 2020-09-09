@@ -41,24 +41,28 @@ CREATE TABLE saved_list (
 
 -- copy location csv into location table
 COPY locations
-FROM '/Users/michaelwu/Desktop/Hrsf129/SDC/More-places-to-stay-carousel/seeder/location.csv'
+FROM '/home/ec2-user/location.csv'
 DELIMITER ',' CSV HEADER;
 
 -- copy properties csv into properties table
 COPY properties (id, title, image, description, avg_rating, rates, number_of_reviews, location_id, superhost)
-FROM '/Users/michaelwu/Desktop/Hrsf129/SDC/More-places-to-stay-carousel/seeder/property.csv'
+FROM '/home/ec2-user/property.csv'
 DELIMITER ',' CSV HEADER;
 
 -- copy saved_list csv into saved_list table
 COPY saved_list
-FROM '/Users/michaelwu/Desktop/Hrsf129/SDC/More-places-to-stay-carousel/seeder/list.csv'
+FROM '/home/ec2-user/list.csv'
 DELIMITER ',' CSV HEADER;
 
 
 -- copy similiar_properties csv into similiar_properties table
 COPY similiar_properties
-FROM '/Users/michaelwu/Desktop/Hrsf129/SDC/More-places-to-stay-carousel/seeder/sim.csv'
-DELIMITER ',' CSV HEADER;
+FROM '/home/ec2-user/similiar.csv'
+DELIMITER ';' CSV HEADER;
+
+COPY similiar_properties
+FROM '/home/ec2-user/similiar1.csv'
+DELIMITER ';' CSV HEADER;
 
 -- add forign key to similiar_properties
 ALTER TABLE similiar_properties ADD CONSTRAINT fk_links_propertyId FOREIGN KEY (property_id) REFERENCES properties(id);

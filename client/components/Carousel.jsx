@@ -42,6 +42,7 @@ const Carousel = (props) => (
             <Images graphics={listing} modal={props.modal} liked={props.liked} />
             <Rating rating={listing} />
             <Listing listing={listing} />
+            <br></br>
             <Description description={listing} />
             <NightlyRate rate={listing} />
           </Item>

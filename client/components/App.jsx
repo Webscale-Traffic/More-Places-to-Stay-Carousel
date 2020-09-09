@@ -70,10 +70,29 @@ class App extends React.Component {
   }
 
   getListings() {
-    axios.get(`/properties/:id`)
+    let propId = window.location.pathname;
+    let id = propId.match(/(\d+)/)[0];
+    axios.get(`/properties/${id}/similiar`)
       .then((response) => {
         const suggestedListings = response.data;
-        console.log(suggestedListings);
+        console.log('what we got', suggestedListings);
+        this.setState({ suggestedListings, isLoading: false });
+        this.renderPage(1);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  postListing(data) {
+    let propId = window.location.pathname;
+    let id = propId.match(/(\d+)/)[0];
+    axios.post(`/properties/${id}/savedList`, {
+      list_name: data.list_name,
+    })
+      .then((response) => {
+        const suggestedListings = response.data;
+        console.log('what we got', suggestedListings);
         this.setState({ suggestedListings, isLoading: false });
         this.renderPage(1);
       })
