@@ -70,10 +70,12 @@ class App extends React.Component {
   }
 
   getListings() {
-    axios.get(`/properties/:id`)
+    let propId = window.location.pathname;
+    let id = propId.match(/(\d+)/)[0];
+    axios.get(`/properties/${id}/similiar`)
       .then((response) => {
         const suggestedListings = response.data;
-        console.log(suggestedListings);
+        console.log('what we got', suggestedListings);
         this.setState({ suggestedListings, isLoading: false });
         this.renderPage(1);
       })

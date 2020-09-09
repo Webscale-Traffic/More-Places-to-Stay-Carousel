@@ -6,4 +6,6 @@ dsbulk-1.6.0
 
 newrelic.js
 
-*.log
+newrelic_agent.log
+
+*.pem
