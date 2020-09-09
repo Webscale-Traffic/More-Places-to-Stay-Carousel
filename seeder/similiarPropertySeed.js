@@ -27,15 +27,20 @@ const similiarProperties = (id, entries) => {
   let dataSim = '';
   let currentID = 0;
 
-      while (checkArray.length < 12 && currentID!== id ) {
-        let randomProperty = randomNumber(1, 10000000);
+  for (let i = 1; i < 16; i++) {
+    // while (i < 12){
+    const randomNumberSet = [randomNumber(1, 10), randomNumber(10, 100), randomNumber(100, 1000),randomNumber(1000, 10000), randomNumber(10000, 100000), randomNumber(100000, 1000000), randomNumber(5000000, 10000000), randomNumber(1000000, 10000000)];
+    let randomProperty = randomNumberSet[randomNumber(0,randomNumberSet.length-1)];
+      if ( currentID !== id && noDuplicate[randomProperty] === undefined) {
         currentID = randomProperty;
         dataSim += `${id},`;
         dataSim += ` ${randomProperty}`;
         dataSim += `\n`;
-        noDuplicate[randomProperty] = 1;
+        noDuplicate[randomNumberSet] = 1;
         checkArray.push(randomProperty)
       }
+    // }
+  }
   return dataSim;
 }
 
@@ -63,9 +68,9 @@ const writeSim = (writer, times, callback) => {
   writeFile();
 }
 
-const writeStream = fs.createWriteStream('./sim.csv')
+const writeStream = fs.createWriteStream('./sim5.csv')
 const line1 = 'property_id, related_id \n';
 writeStream.write(line1);
-writeSim(writeStream, 10000000, () => {
+writeSim(writeStream, 1, () => {
   console.log('written!')
 })
