@@ -49,7 +49,7 @@ app.get('/properties/:id/similiar', (req, res) => {
 });
 
 app.post('/properties/:id/savedList', (req, res) => {
-  console.log(req.params.id);
+  // console.log(req.params.id);
 
   model.saveList(req.body, req.params.id, (err, data) => {
     if (err) {
