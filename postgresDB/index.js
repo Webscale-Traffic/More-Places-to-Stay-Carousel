@@ -9,7 +9,7 @@ const pool = new Pool ( {
 
 pool.connect((err) => {
   if (err) {
-    console.log('error');
+    console.log('error',err);
   } else {
     console.log('connected to Postgres');
   }
