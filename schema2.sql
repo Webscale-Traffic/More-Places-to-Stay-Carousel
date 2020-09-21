@@ -26,10 +26,6 @@ CREATE TABLE properties (
 CREATE TABLE similiar_properties (
 property_id int NOT NULL,
 related_id int NOT NULL
--- related_id int NOT NUll,
--- FOREIGN KEY (property_id) REFERENCES properties(id),
--- FOREIGN KEY (location_id) REFERENCES locations(id)
--- FOREIGN KEY (related_id) REFERENCES properties(id)
 );
 
 CREATE TABLE saved_list (
@@ -57,8 +53,8 @@ DELIMITER ',' CSV HEADER;
 
 -- copy similiar_properties csv into similiar_properties table
 COPY similiar_properties
-FROM '/home/ec2-user/similiar.csv'
-DELIMITER ';' CSV HEADER;
+FROM '/home/ec2-user/sim6.csv'
+DELIMITER ',' CSV HEADER;
 
 COPY similiar_properties
 FROM '/home/ec2-user/similiar1.csv'

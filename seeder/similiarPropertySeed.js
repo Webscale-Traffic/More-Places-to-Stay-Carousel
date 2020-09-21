@@ -71,6 +71,6 @@ const writeSim = (writer, times, callback) => {
 const writeStream = fs.createWriteStream('./sim5.csv')
 const line1 = 'property_id, related_id \n';
 writeStream.write(line1);
-writeSim(writeStream, 1, () => {
+writeSim(writeStream, 5000000, () => {
   console.log('written!')
 })
