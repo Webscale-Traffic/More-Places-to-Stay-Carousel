@@ -52,7 +52,6 @@ const similiarProperties = (entries) => {
   let noDuplicate = {};
   const dataSim = '';
   for (let k = 1; k <= entries; k++) {
-    // let randomNumberOfProperty = randomNumber(3, 20)
     for (let m = 1; m <= 12; m++) {
       let randomProperty = randomNumber(1, entries);
       while (noDuplicate[randomProperty] === undefined) {
@@ -124,20 +123,20 @@ const writeLocs = (writer, times, callback) => {
 }
 
 //Properties_______________________________________________
-// const writeStream = fs.createWriteStream('./property.csv')
-// const line1 = 'id, title, image, description, avg_rating, rates, number_of_reviews, location, superhost \n';
-// writeStream.write(line1);
-// writeProps(writeStream, 10000000, () => {
-//   console.log('written!')
-// })
+const writeStream = fs.createWriteStream('./property.csv')
+const line1 = 'id, title, image, description, avg_rating, rates, number_of_reviews, location, superhost \n';
+writeStream.write(line1);
+writeProps(writeStream, 10000000, () => {
+  console.log('written!')
+})
 
 // //locations________________________________________________
-// const writeStreamLocs = fs.createWriteStream('./location.csv')
-// const line1Loc = 'id, location\n'
-// writeStreamLocs.write(line1Loc);
-// writeLocs(writeStreamLocs, locations.length, () => {
-//   console.log('got locations')
-// })
+const writeStreamLocs = fs.createWriteStream('./location.csv')
+const line1Loc = 'id, location\n'
+writeStreamLocs.write(line1Loc);
+writeLocs(writeStreamLocs, locations.length, () => {
+  console.log('got locations')
+})
 
 //list______________________________________________________
 const seedList = (entries) => {

@@ -3,7 +3,6 @@ const seedProperty = (entries) => {
   let datalocation = 'id location\n';
   let dataList = 'id list_name pop_id\n';
   for (let j = 1; j < locations.length; j++) {
-    // let location = `${locations[randomNumber(0, 18)]}`
     datalocation += `${j},`;
     datalocation += ` "${locations[j - 1]}"`;
     datalocation += `\n`;
@@ -20,7 +19,6 @@ const seedProperty = (entries) => {
         dataList += `\n`;
         noDuplicate[randomProperty] = 1;
       }
-      // dataList += ` ${randomNumber(1,entries)}`;
     }
   }
 
@@ -63,27 +61,12 @@ const seedProperty = (entries) => {
   })
 }
 
-// const similiarProperty = (entries) => {
-//   let location = `${locations[randomNumber(0,locations.length)]}`;
-
-// }
-
 seedProperty(10000000)
   .then(() => { console.log('success') })
   .catch(() => { console.log('nope') })
 let location = `${locations[randomNumber(0, 19)]}`;
 let ran = randomNumber(0, 18)
 console.log(locationStorage)
-
-
-//id | similar_id
-//1  | 23
-//1  | 2
-//1  | 15
-//1  | 90
-//2  | 80
-//2  | 25
-//3  | 234
 
 for (let i = 1; i <= ; i++) {
   let noDuplicate = {};

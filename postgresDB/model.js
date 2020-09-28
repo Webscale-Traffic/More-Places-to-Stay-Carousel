@@ -15,7 +15,7 @@ module.exports = {
   },
 
   getSimiliarProperties: (id, callback) => {
-    db.query(` select * from properties where id in (select related_id from similiar_properties where property_id = ${id});` , (error, data) => {
+    db.query(`select * from properties where id in (select related_id from similiar_properties where property_id = ${id})` , (error, data) => {
       if (error) {
         console.log('cannot search database',id, error);
         callback(error);

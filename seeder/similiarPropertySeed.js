@@ -28,7 +28,6 @@ const similiarProperties = (id, entries) => {
   let currentID = 0;
 
   for (let i = 1; i < 16; i++) {
-    // while (i < 12){
     const randomNumberSet = [randomNumber(1, 10), randomNumber(10, 100), randomNumber(100, 1000),randomNumber(1000, 10000), randomNumber(10000, 100000), randomNumber(100000, 1000000), randomNumber(5000000, 10000000), randomNumber(1000000, 10000000)];
     let randomProperty = randomNumberSet[randomNumber(0,randomNumberSet.length-1)];
       if ( currentID !== id && noDuplicate[randomProperty] === undefined) {
@@ -39,7 +38,6 @@ const similiarProperties = (id, entries) => {
         noDuplicate[randomNumberSet] = 1;
         checkArray.push(randomProperty)
       }
-    // }
   }
   return dataSim;
 }
